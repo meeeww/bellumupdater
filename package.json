@@ -14,5 +14,8 @@
     "axios": "^1.4.0",
     "discord-webhook-node": "^1.1.8",
     "node-schedule": "^2.1.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.3"
   }
 }
