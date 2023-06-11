@@ -43,7 +43,6 @@ const handler = async function (event, context) {
                         }
                     })
                 }
-                hook.send("Actualizados rangos de " + contador + " invocadores")
             } else {
                 hook.send("Fallo en la conexión. <@286402429258301440>")
             }
@@ -60,4 +59,4 @@ const handler = async function (event, context) {
     }
 };
 
-exports.handler = schedule("*/1 * * * *", handler);
+exports.handler = schedule("* */12 * * *", handler);
