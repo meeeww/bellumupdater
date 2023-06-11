@@ -18,8 +18,10 @@ const handler = async function (event, context) {
                 let contador = 0
                 for (let cuenta in response1.data) {
                     contador++
+                    console.log(response1.data[cuenta])
                     axios.get("https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/" + response1.data[cuenta]["id_riot"] + "?api_key=" + API).then(function (response2) {
-                        if (response2.data[0]["queueType"] == "RANKED_SOLO_5x5") {
+                        console.log(response2.data)
+                    if (response2.data[0]["queueType"] == "RANKED_SOLO_5x5") {
                             axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[0]["tier"], rango: response2.data[0]["rank"], lps: response2.data[0]["leaguePoints"], fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } }).then(function (response) {
                                 hook.send("Bien añadido 1")
                             }).catch(function (e){
