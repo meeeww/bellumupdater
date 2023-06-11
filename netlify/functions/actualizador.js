@@ -35,7 +35,7 @@ import { schedule } from "@netlify/functions";
 
 const handler = async function(event, context) {
   console.log("1 minuto");
-    await hook.send("Prueba de la conexión. <@286402429258301440>")
+    await hook.send("Prueba de la conexión v2. <@286402429258301440>")
     return {
         statusCode: 200,
     };
