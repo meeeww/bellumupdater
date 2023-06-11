@@ -36,6 +36,6 @@ schedule.scheduleJob('* * */12 * * *', () => {
 })
 
 //Actualizador de nombres
-// schedule.scheduleJob('*/2 * * * * *', () => {
-//     console.log("heys")
-// })
+schedule.scheduleJob('*/2 * * * * *', () => {
+    console.log("heys")
+})
