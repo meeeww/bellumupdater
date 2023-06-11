@@ -54,10 +54,12 @@ const handler = async function (event, context) {
     }
 
     try {
+        await axios.get("https://bellumserver.netlify.app/.netlify/functions/api/historial").then(function (response1) { 
 
+        })
     } catch (e) {
 
     }
 };
 
-exports.handler = schedule("* */12 * * *", handler);
+exports.handler = schedule("*/1 * * * *", handler);
