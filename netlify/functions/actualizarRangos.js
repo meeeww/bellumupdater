@@ -11,7 +11,7 @@ const handler = async function (event, context) {
     var date = new Date();
     date = date.getUTCFullYear() + '-' +
         ('00' + (date.getUTCMonth() + 1)).slice(-2) + '-' +
-        ('00' + date.getUTCDate()).slice(-2) + ' ';
+        ('00' + date.getUTCDate()).slice(-2) + '';
     try {
         await axios.get("https://bellumserver.netlify.app/.netlify/functions/api/cuentas").then(function (response1) {
             if (response1.status == 200) {
@@ -28,7 +28,7 @@ const handler = async function (event, context) {
                                 console.log(e)
                             })
                         } else if (response2.data[1]["queueType"] == "RANKED_SOLO_5x5") {
-                            console.log({idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[0]["tier"], rango: response2.data[0]["rank"], lps: response2.data[0]["leaguePoints"], fecha: date})
+                            console.log({ idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[0]["tier"], rango: response2.data[0]["rank"], lps: response2.data[0]["leaguePoints"], fecha: date })
                             axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[1]["tier"], rango: response2.data[1]["rank"], lps: response2.data[1]["leaguePoints"], fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } }).then(function (response) {
                                 console.log("bien añadido")
                             }).catch(function (e) {
@@ -52,6 +52,12 @@ const handler = async function (event, context) {
         hook.send("Fallo en la función. <@286402429258301440>")
         console.log(e)
     }
+
+    try {
+
+    } catch (e) {
+
+    }
 };
 
-exports.handler = schedule("*/1 * * * *", handler);
+exports.handler = schedule("* */12 * * *", handler);
