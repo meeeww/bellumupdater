@@ -15,6 +15,7 @@ const handler = async function (event, context) {
                 contador++
                 console.log(response1.data[cuenta])
                 await axios.get("https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/" + response1.data[cuenta]["puuid_riot"] + "?api_key=" + API).then(async function (response2) {
+                    console.log(response2.data)
                     if (response1.data[cuenta]["invocador"] != response2.data[0]["name"]) {
                         await axios.put("https://bellumserver.netlify.app/.netlify/functions/api/cambiarnombreinvocador", { idCuenta: response1.data[cuenta]["id_cuenta"], invocador: response2.data[0]["name"] }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } })
                     }
