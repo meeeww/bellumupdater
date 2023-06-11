@@ -20,11 +20,17 @@ const handler = async function (event, context) {
                     contador++
                     axios.get("https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/" + response1.data[cuenta]["id_riot"] + "?api_key=" + API).then(function (response2) {
                         if (response2.data[0]["queueType"] == "RANKED_SOLO_5x5") {
-                            axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[0]["tier"], rango: response2.data[0]["rank"], lps: response2.data[0]["leaguePoints"], fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } })
+                            axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[0]["tier"], rango: response2.data[0]["rank"], lps: response2.data[0]["leaguePoints"], fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } }).then(function (response) {
+                                hook.send("Bien añadido 1")
+                            })
                         } else if (response2.data[1]["queueType"] == "RANKED_SOLO_5x5") {
-                            axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[1]["tier"], rango: response2.data[1]["rank"], lps: response2.data[1]["leaguePoints"], fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } })
+                            axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[1]["tier"], rango: response2.data[1]["rank"], lps: response2.data[1]["leaguePoints"], fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } }).then(function (response) {
+                                hook.send("Bien añadido 2")
+                            })
                         } else if (response2.data[2]["queueType"] == "RANKED_SOLO_5x5") {
-                            axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[2]["tier"], rango: response2.data[2]["rank"], lps: response2.data[2]["leaguePoints"], fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } })
+                            axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[2]["tier"], rango: response2.data[2]["rank"], lps: response2.data[2]["leaguePoints"], fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } }).then(function (response) {
+                                hook.send("Bien añadido 3")
+                            })
                         }
                     })
                 }
@@ -39,4 +45,4 @@ const handler = async function (event, context) {
     }
 };
 
-exports.handler = schedule("*/1 * * * *", handler);
+exports.handler = schedule("*/10 * * * * *", handler);
