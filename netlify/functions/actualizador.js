@@ -4,6 +4,7 @@ const hook = new Webhook("https://discord.com/api/webhooks/1117244669148024953/k
 
 const handler = async function() {
     hook.send("Test cada hora (sorry for el flood)")
+    console.log("hey")
 
     return {
         statusCode: 200,
