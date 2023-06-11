@@ -23,19 +23,19 @@ const handler = async function (event, context) {
                         console.log(response2.data)
                     if (response2.data[0]["queueType"] == "RANKED_SOLO_5x5") {
                             axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[0]["tier"], rango: response2.data[0]["rank"], lps: response2.data[0]["leaguePoints"], fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } }).then(function (response) {
-                                hook.send("Bien añadido 1")
+                                console.log("bien añadido")
                             }).catch(function (e){
                                 console.log(e)
                             })
                         } else if (response2.data[1]["queueType"] == "RANKED_SOLO_5x5") {
                             axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[1]["tier"], rango: response2.data[1]["rank"], lps: response2.data[1]["leaguePoints"], fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } }).then(function (response) {
-                                hook.send("Bien añadido 2")
+                                console.log("bien añadido")
                             }).catch(function (e){
                                 console.log(e)
                             })
                         } else if (response2.data[2]["queueType"] == "RANKED_SOLO_5x5") {
                             axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[2]["tier"], rango: response2.data[2]["rank"], lps: response2.data[2]["leaguePoints"], fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } }).then(function (response) {
-                                hook.send("Bien añadido 3")
+                                console.log("bien añadido")
                             }).catch(function (e){
                                 console.log(e)
                             })
