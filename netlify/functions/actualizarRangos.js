@@ -1,4 +1,4 @@
-const { schedule } = require("@netlify/functions");
+import { schedule } from "@netlify/functions";
 import axios from 'axios'
 
 import { Webhook } from 'discord-webhook-node';
