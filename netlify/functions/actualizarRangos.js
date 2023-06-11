@@ -13,7 +13,7 @@ const handler = async function (event, context) {
     ('00' + (date.getUTCMonth() + 1)).slice(-2) + '-' +
     ('00' + date.getUTCDate()).slice(-2) + ' ';
 
-  axios.get("https://bellumserver.netlify.app/.netlify/functions/api/cuentas").then(function (response1) {
+  await axios.get("https://bellumserver.netlify.app/.netlify/functions/api/cuentas").then(function (response1) {
     if (response1.status == 200) {
       let contador = 0
       for (let cuenta in response1.data) {
