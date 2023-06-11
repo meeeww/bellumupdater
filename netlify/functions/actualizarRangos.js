@@ -53,7 +53,7 @@ const handler = async function (event, context) {
     }
 
     try {
-        await axios.delete("https://bellumserver.netlify.app/.netlify/functions/api/fixRango")
+        await axios.delete("https://bellumserver.netlify.app/.netlify/functions/api/fixrango")
     } catch (e) {
         hook.send("Fallo en la función 2. <@286402429258301440>")
     }
