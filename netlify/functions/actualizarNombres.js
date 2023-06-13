@@ -24,4 +24,4 @@ const handler = async function (event, context) {
     })
 };
 
-exports.handler = schedule("* 1 * * *", handler);
+exports.handler = schedule("30 * * * *", handler);
