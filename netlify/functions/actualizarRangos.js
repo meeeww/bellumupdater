@@ -21,37 +21,46 @@ const handler = async function (event, context) {
                     console.log(response1.data[cuenta])
                     await axios.get("https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/" + response1.data[cuenta]["id_riot"] + "?api_key=" + API).then(async function (response2) {
                         console.log(response2.data)
-                        if (response2.data[0]["queueType"] == "RANKED_SOLO_5x5") {
-                            await axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[0]["tier"], rango: response2.data[0]["rank"], lps: response2.data[0]["leaguePoints"], fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } }).then(function (response) {
-                                console.log("bien añadido")
-                            }).catch(function (e) {
-                                console.log(e)
-                            })
-                        } else if (response2.data[1]["queueType"] == "RANKED_SOLO_5x5") {
-                            console.log({ idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[0]["tier"], rango: response2.data[0]["rank"], lps: response2.data[0]["leaguePoints"], fecha: date })
-                            await axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[1]["tier"], rango: response2.data[1]["rank"], lps: response2.data[1]["leaguePoints"], fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } }).then(function (response) {
-                                console.log("bien añadido")
-                            }).catch(function (e) {
-                                console.log(e)
-                            })
-                        } else if (response2.data[2]["queueType"] == "RANKED_SOLO_5x5") {
-                            await axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[2]["tier"], rango: response2.data[2]["rank"], lps: response2.data[2]["leaguePoints"], fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } }).then(function (response) {
-                                console.log("bien añadido")
-                            }).catch(function (e) {
-                                console.log(e)
-                            })
-                        } else if (response2.data[3]["queueType"] == "RANKED_SOLO_5x5") {
-                            await axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[3]["tier"], rango: response2.data[3]["rank"], lps: response2.data[3]["leaguePoints"], fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } }).then(function (response) {
-                                console.log("bien añadido")
-                            }).catch(function (e) {
-                                console.log(e)
-                            })
-                        } else {
-                            await axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: "UNRANKED", rango: "UR", lps: 0, fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } }).then(function (response) {
-                                console.log("bien añadido")
-                            }).catch(function (e) {
-                                console.log(e)
-                            })
+                        for (let contadorQueues = 0; contadorQueues < response2.data.length; contadorQueues++) {
+                            if (response2.data[contadorQueues]["queueType"] == "RANKED_SOLO_5x5") {
+                                await axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[contadorQueues]["tier"], rango: response2.data[contadorQueues]["rank"], lps: response2.data[contadorQueues]["leaguePoints"], fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } }).then(function (response) {
+                                    console.log("bien añadido")
+                                }).catch(function (e) {
+                                    console.log(e)
+                                })
+                            }
+                            // if (response2.data[0]["queueType"] == "RANKED_SOLO_5x5") {
+                            //     await axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[0]["tier"], rango: response2.data[0]["rank"], lps: response2.data[0]["leaguePoints"], fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } }).then(function (response) {
+                            //         console.log("bien añadido")
+                            //     }).catch(function (e) {
+                            //         console.log(e)
+                            //     })
+                            // } else if (response2.data[1]["queueType"] == "RANKED_SOLO_5x5") {
+                            //     console.log({ idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[0]["tier"], rango: response2.data[0]["rank"], lps: response2.data[0]["leaguePoints"], fecha: date })
+                            //     await axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[1]["tier"], rango: response2.data[1]["rank"], lps: response2.data[1]["leaguePoints"], fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } }).then(function (response) {
+                            //         console.log("bien añadido")
+                            //     }).catch(function (e) {
+                            //         console.log(e)
+                            //     })
+                            // } else if (response2.data[2]["queueType"] == "RANKED_SOLO_5x5") {
+                            //     await axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[2]["tier"], rango: response2.data[2]["rank"], lps: response2.data[2]["leaguePoints"], fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } }).then(function (response) {
+                            //         console.log("bien añadido")
+                            //     }).catch(function (e) {
+                            //         console.log(e)
+                            //     })
+                            // } else if (response2.data[3]["queueType"] == "RANKED_SOLO_5x5") {
+                            //     await axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[3]["tier"], rango: response2.data[3]["rank"], lps: response2.data[3]["leaguePoints"], fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } }).then(function (response) {
+                            //         console.log("bien añadido")
+                            //     }).catch(function (e) {
+                            //         console.log(e)
+                            //     })
+                            // } else {
+                            //     await axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: "UNRANKED", rango: "UR", lps: 0, fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } }).then(function (response) {
+                            //         console.log("bien añadido")
+                            //     }).catch(function (e) {
+                            //         console.log(e)
+                            //     })
+                            // }
                         }
                     })
                 }
