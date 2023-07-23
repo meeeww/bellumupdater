@@ -40,6 +40,18 @@ const handler = async function (event, context) {
                             }).catch(function (e) {
                                 console.log(e)
                             })
+                        } else if (response2.data[3]["queueType"] == "RANKED_SOLO_5x5") {
+                            await axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: response2.data[3]["tier"], rango: response2.data[3]["rank"], lps: response2.data[3]["leaguePoints"], fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } }).then(function (response) {
+                                console.log("bien añadido")
+                            }).catch(function (e) {
+                                console.log(e)
+                            })
+                        } else {
+                            await axios.post("https://bellumserver.netlify.app/.netlify/functions/api/actualizarrango", { idCuenta: response1.data[cuenta]["id_cuenta"], division: "UNRANKED", rango: "UR", lps: 0, fecha: date }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } }).then(function (response) {
+                                console.log("bien añadido")
+                            }).catch(function (e) {
+                                console.log(e)
+                            })
                         }
                     })
                 }
