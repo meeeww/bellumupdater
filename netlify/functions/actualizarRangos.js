@@ -78,7 +78,6 @@ const handler = async function (event, context) {
     } catch (e) {
         hook.send("Fallo en la función 2. <@286402429258301440>")
     }
-    hook.send("Funciona <@286402429258301440>")
     console.log(e)
 };
 
